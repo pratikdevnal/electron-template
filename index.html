@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch Data from Flask</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+      }
+      #data {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #007bff;
+        background-color: #f0f8ff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Data Fetch Example</h1>
+    <button id="fetch-data">Fetch Data</button>
+    <div id="data"></div>
+
+    <script>
+      document.getElementById("fetch-data").addEventListener("click", () => {
+        fetch("http://localhost:5000/api/data") // Adjust the URL if needed
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            document.getElementById("data").innerText = data.data;
+          })
+          .catch((error) => {
+            console.error(
+              "There was a problem with the fetch operation:",
+              error
+            );
+          });
+      });
+    </script>
+  </body>
+</html>
